@@ -15,8 +15,9 @@ function crearTarea(){
     const nombre = document.getElementById("nombre").value;
     const prioridad = document.getElementById("prioridad").value;
     const categoria = document.getElementById("categoria").value;
+    console.log(prioridad, categoria);
 
-    if (nombre === "" || prioridad === "" || categoria === "") {
+    if (nombre === "" || prioridad === "" || categoria === "" || prioridad === "todas" || categoria === "todas") {
         alert("Por favor, completa todos los campos.");
         return;
     }
@@ -62,20 +63,23 @@ function agregarTarea(tarea) {
 
     listaTareas.appendChild(li);
 
-    // Llama a mostrarDetalleTarea para asignar el evento onclick
     mostrarDetalleTarea();
 }
 
 function mostrarForm() {
-    const form = document.getElementById("form-tareas"); 
+    const form = document.getElementById("form-tareas");
+    const overlay = document.getElementById("overlay");
     form.classList.remove("oculto");
     form.classList.add("visible");
+    overlay.classList.add("visible");
 }
 
 function ocultarForm() {
-    const form = document.getElementById("form-tareas"); 
+    const form = document.getElementById("form-tareas");
+    const overlay = document.getElementById("overlay");
     form.classList.remove("visible");
     form.classList.add("oculto");
+    overlay.classList.remove("visible");
 }
 
 function filtrarTareas() {
@@ -87,10 +91,7 @@ function filtrarTareas() {
         const tareaPrioridad = tarea.getAttribute('data-prioridad');
         const tareaCategoria = tarea.getAttribute('data-categoria');
 
-        if (
-            (prioridad === 'todas' || tareaPrioridad === prioridad) &&
-            (categoria === 'todas' || tareaCategoria === categoria)
-        ) {
+        if ((prioridad === 'todas' || tareaPrioridad === prioridad) && (categoria === 'todas' || tareaCategoria === categoria)) {
             tarea.style.display = 'flex';
         } else {
             tarea.style.display = 'none';
@@ -104,7 +105,6 @@ function mostrarDetalleTarea() {
 
     tareas.forEach(tarea => {
         tarea.onclick = function(event) {
-            // Evitar que el clic en los botones de estado o eliminar abra el detalle
             if (event.target.classList.contains('estado-circulo') || 
                 event.target.classList.contains('tacho-eliminar')) {
                 return;
@@ -126,16 +126,19 @@ function mostrarDetalleTarea() {
             contenedorDetalle.classList.remove('oculto');
             contenedorDetalle.classList.add('visible');
             
-            // Agregar evento al botón de cerrar
             document.getElementById('btn-cerrar-detalle').addEventListener('click', cerrarDetalle);
         };
     });
 }
 
+
+
 function cerrarDetalle() {
-    const contenedorDetalle = document.getElementById('contenedor-detalle');
-    contenedorDetalle.classList.remove('visible');
-    contenedorDetalle.classList.add('oculto');
+    const contenedorDetalle = document.getElementById("contenedor-detalle");
+    const overlay = document.getElementById("overlay");
+    contenedorDetalle.classList.remove("visible");
+    contenedorDetalle.classList.add("oculto");
+    overlay.classList.remove("visible");
 }
 
 document.getElementById('tareas').addEventListener('DOMNodeInserted', mostrarDetalleTarea);

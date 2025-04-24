@@ -24,13 +24,13 @@
             <div id="contenedor-filtros">
                 <h3>Filtros</h3>
                 <select name="prioridad" id="f-prioridad" onchange="filtrarTareas()">
-                    <option value="todas">Prioridad</option>
+                    <option value="todas">Todas las prioridades</option>
                     <option value="alta">Alta</option>
                     <option value="media">Media</option>
                     <option value="baja">Baja</option>
                 </select>
                 <select name="categoria" id="f-categoria" onchange="filtrarTareas()">
-                    <option value="todas">Categoría</option>
+                    <option value="todas">Todas las categorías</option>
                     <option value="trabajo">Trabajo</option>
                     <option value="estudio">Estudio</option>
                     <option value="hogar">Hogar</option>
@@ -45,23 +45,24 @@
                     <input type="text" id="nombre" name="nombre" required>
                     <label for="prioridad">Prioridad:</label>
                     <select name="prioridad" id="prioridad">
-                        <option value="0">Seleccionar</option>
+                        <option value="todas">Seleccionar</option>
                         <option value="Alta">Alta</option>
                         <option value="Media">Media</option>
                         <option value="Baja">Baja</option>
                     </select>
                     <label for="categoria">Categoría:</label>
                     <select name="categoria" id="categoria">
-                        <option value="0">Seleccionar</option>
+                        <option value="todas">Seleccionar</option>
                         <option value="Trabajo">Trabajo</option>
                         <option value="Estudio">Estudio</option>
                         <option value="Hogar">Hogar</option>
                     </select>
                     <button type="button" id="btn-guardar-tarea" onclick="crearTarea()">Guardar Tarea</button>
-                    <button type="button" id="btn-cancelar-tarea" onclick="ocultarForm()">Cancelar</button>
+                    <button type="button" id="btn-cancelar-tarea" onclick="ocultarForm()">Salir</button>
                 </form>
             </div>
             <div id="contenedor-detalle" class="oculto"></div>
+            <div id="overlay"></div>
 
             </div>
             <div id="tareas">
